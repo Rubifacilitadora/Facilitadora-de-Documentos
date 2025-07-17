@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilitadora Documental - Você respira, eu resolvo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif']
+                    },
+                    colors: {
+                        primary: '#1a1a1a',
+                        accent: '#A3B07B',
+                        soft: '#f8f9fa',
+                        border: '#e9ecef'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .service-card {
+            transition: all 0.5s ease;
+        }
+        .modal {
+            display: none;
+        }
+        .modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 font-sans">
+    <!-- Dark mode support -->
+    <script>
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+    </script>
+
+    <!-- Header -->
+    <header class="border-b border-border bg-white dark:bg-gray-900">
+        <div class="max-w-6xl mx-auto px-6 py-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <!-- Logo -->
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <svg width="48" height="48" viewBox="0 0 48 48" class="text-accent">
+                                <!-- Documento base -->
+                                <rect x="10" y="6" width="24" height="32" rx="2" fill="currentColor" opacity="0.1" stroke="currentColor" stroke-width="1.5"/>
+                                
+                                <!-- Linhas do documento -->
+                                <line x1="14" y1="14" x2="26" y2="14" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                                <line x1="14" y1="18" x2="28" y2="18" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                                <line x1="14" y1="22" x2="24" y2="22" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+                                
+                                <!-- Check mark estilizado -->
+                                <circle cx="32" cy="16" r="8" fill="currentColor"/>
+                                <path d="m28 16 2 2 4-4" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                
+                                <!-- Seta fluida indicando movimento/facilidade -->
+                                <path d="M16 28 Q20 32 24 28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-serif font-semibold text-primary dark:text-white">Facilitadora Documental</h1>
+                            <p class="text-gray-600 dark:text-gray-400 mt-1 text-sm">Soluções em documentação</p>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="scrollToContact()" class="bg-accent text-white px-6 py-3 rounded-lg hover:opacity-90 transition-all">
+                    Entrar em contato
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-soft dark:bg-gray-800 py-20">
+        <div class="max-w-4xl mx-auto px-6 text-center fade-in">
+            <h2 class="text-5xl md:text-6xl font-serif font-medium text-primary dark:text-white mb-6 leading-tight">
+                Você respira,<br>
+                <span class="italic text-accent">eu resolvo</span>
+            </h2>
+            <p class="text-2xl text-gray-700 dark:text-gray-200 mb-4 font-medium">
+                Deixe a burocracia comigo.
+            </p>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                Facilitadora documental com agilidade e sigilo para resolver toda a sua papelada.
+            </p>
+            <div class="inline-flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Agilidade
+                </span>
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Sigilo
+                </span>
+                <span class="flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    Retirada & Entrega
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl font-serif text-primary dark:text-white mb-4">Serviços</h3>
+                <p class="text-gray-600 dark:text-gray-300">Soluções completas para suas necessidades documentais</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service items -->
+                <div class="service-card group bg-gradient-to-br from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl border-2 border-transparent hover:border-accent/20 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-accent transition-colors">Certidões Negativas</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Federais, estaduais e municipais com agilidade e segurança</p>
+                    <button onclick="openModal('modal-certidoes')" class="mt-4 flex items-center text-sm text-blue-600 dark:text-blue-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="service-card group bg-gradient-to-br from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl border-2 border-transparent hover:border-accent/20 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-accent transition-colors">Matrícula de Imóveis</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Documentação imobiliária completa e regularizada</p>
+                    <button onclick="openModal('modal-imoveis')" class="mt-4 flex items-center text-sm text-emerald-600 dark:text-emerald-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="service-card group bg-gradient-to-br from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl border-2 border-transparent hover:border-accent/20 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-5m-4 0V4a2 2 0 114 0v2m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-accent transition-colors">Regularização CPF/CNPJ</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Documentação fiscal em dia com total sigilo</p>
+                    <button onclick="openModal('modal-cpf-cnpj')" class="mt-4 flex items-center text-sm text-orange-600 dark:text-orange-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="service-card group bg-gradient-to-br from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl border-2 border-transparent hover:border-accent/20 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-accent transition-colors">Consultoria Documental</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Acompanhamento especializado em cada etapa</p>
+                    <button onclick="openModal('modal-consultoria')" class="mt-4 flex items-center text-sm text-indigo-600 dark:text-indigo-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="service-card group bg-gradient-to-br from-white to-gray-50 dark:from-gray-700 dark:to-gray-800 p-8 rounded-2xl border-2 border-transparent hover:border-accent/20 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-primary dark:text-white mb-3 group-hover:text-accent transition-colors">Retirada & Entrega em Porto Alegre</h4>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">Serviço de coleta e entrega com total comodidade</p>
+                    <button onclick="openModal('modal-entrega')" class="mt-4 flex items-center text-sm text-teal-600 dark:text-teal-400 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <span>Saiba mais</span>
+                        <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="bg-soft dark:bg-gray-800 py-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <div>
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Atendimento Personalizado</h4>
+                    <p class="text-gray-600 dark:text-gray-300">Cada cliente é único para nós</p>
+                </div>
+
+                <div>
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Agilidade & Sigilo</h4>
+                    <p class="text-gray-600 dark:text-gray-300">Rapidez com total confidencialidade</p>
+                </div>
+
+                <div>
+                    <div class="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Consultoria Completa</h4>
+                    <p class="text-gray-600 dark:text-gray-300">Orientação em cada etapa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="bg-soft dark:bg-gray-800 py-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <div class="w-20 h-20 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-3xl font-serif text-primary dark:text-white mb-4">Quem sou</h3>
+            </div>
+            
+            <div class="prose prose-lg mx-auto text-gray-700 dark:text-gray-300">
+                <p class="text-xl text-center mb-8 font-medium text-primary dark:text-white">
+                    Olá, eu sou a Rubi, sua facilitadora documental.
+                </p>
+                
+                <p class="mb-6 leading-relaxed">
+                    Ajudo pessoas e empresas a resolverem pendências burocráticas com agilidade, clareza e zero dor de cabeça. Acredito que ninguém deveria ficar travado por causa de papelada complicada.
+                </p>
+                
+                <h4 class="text-xl font-semibold text-primary dark:text-white mb-4 mt-8">Minha Experiência</h4>
+                <p class="mb-6 leading-relaxed">
+                    Trabalho há 20 anos com análise, emissão e atualização de documentos de diversos tipos -- desde certidões simples até regularizações de imóveis. Nessas duas décadas, já acompanhei muitos casos e adquiri bastante conhecimento sobre os caminhos mais eficientes nas instituições e repartições públicas.
+                </p>
+                
+                <h4 class="text-xl font-semibold text-primary dark:text-white mb-4 mt-8">Minha História</h4>
+                <p class="mb-6 leading-relaxed">
+                    Comecei esse trabalho depois de perceber como a burocracia deixa muita gente travada, perdida entre protocolos confusos e exigências que parecem não ter fim. Meu objetivo é transformar a experiência burocrática de algo estressante em algo simples e descomplicado.
+                </p>
+                
+                <h4 class="text-xl font-semibold text-primary dark:text-white mb-4 mt-8">Como Posso Te Ajudar</h4>
+                <p class="mb-6 leading-relaxed">
+                    Emito certidões, regularizo CPF/CNPJ, faço buscas em cartórios e oriento sobre o que realmente precisa ser feito, sem enrolação. Trabalho 100% online e atendo clientes de todo o Brasil -- inclusive quem mora fora do país e precisa resolver algo aqui.
+                </p>
+                
+                <h4 class="text-xl font-semibold text-primary dark:text-white mb-4 mt-8">Meu Jeito de Trabalhar</h4>
+                <p class="mb-6 leading-relaxed">
+                    Sou prática, acessível e gosto de explicar tudo com clareza. Cada caso é único, e trato cada cliente com o respeito e atenção que merece. Nada de linguagem complicada ou processos demorados -- aqui você entende exatamente o que está acontecendo em cada etapa.
+                </p>
+                
+                <h4 class="text-xl font-semibold text-primary dark:text-white mb-4 mt-8">Vamos Resolver Juntos?</h4>
+                <p class="mb-6 leading-relaxed">
+                    Se você precisa de ajuda com documentação, certidões ou está perdido no meio da papelada, me chama no WhatsApp. Vamos resolver isso juntos, de forma simples e eficiente.
+                </p>
+                
+                <p class="text-center text-xl font-medium text-accent mt-8">
+                    Você respira, eu resolvo. É assim que funciona.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h3 class="text-3xl font-serif text-primary dark:text-white mb-4">Entre em contato</h3>
+                <p class="text-gray-600 dark:text-gray-300">Pronto para resolver sua documentação? Fale comigo</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <a href="https://wa.me/5551992927084" target="_blank" class="bg-white dark:bg-gray-800 p-8 rounded-xl border border-border hover:shadow-lg transition-all duration-300 text-center group">
+                    <div class="w-16 h-16 bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-100 dark:group-hover:bg-green-900/30 transition-colors">
+                        <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.700"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-2">WhatsApp</h4>
+                    <p class="text-gray-600 dark:text-gray-300">(51) 99292-7084</p>
+                </a>
+
+                <a href="mailto:rubifacilitadoradocumental@gmail.com" class="bg-white dark:bg-gray-800 p-8 rounded-xl border border-border hover:shadow-lg transition-all duration-300 text-center group">
+                    <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-colors">
+                        <svg class="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.703a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-2">E-mail</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm break-all">rubifacilitadoradocumental@gmail.com</p>
+                </a>
+
+                <a href="https://instagram.com/rubifacilitadoradocumental" target="_blank" class="bg-white dark:bg-gray-800 p-8 rounded-xl border border-border hover:shadow-lg transition-all duration-300 text-center group">
+                    <div class="w-16 h-16 bg-pink-50 dark:bg-pink-900/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-pink-100 dark:group-hover:bg-pink-900/30 transition-colors">
+                        <svg class="w-8 h-8 text-pink-600 dark:text-pink-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987c6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.348-1.051-2.348-2.348s1.051-2.348 2.348-2.348c1.297 0 2.348 1.051 2.348 2.348s-1.051 2.348-2.348 2.348zM12.017 7.729c-2.357 0-4.27 1.913-4.27 4.27s1.913 4.27 4.27 4.27s4.27-1.913 4.27-4.27s-1.913-4.27-4.27-4.27z"/>
+                        </svg>
+                    </div>
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-2">Instagram</h4>
+                    <p class="text-gray-600 dark:text-gray-300">@rubifacilitadoradocumental</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- Modal Certidões Negativas -->
+    <div id="modal-certidoes" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-bold text-primary dark:text-white">Saiba Mais - Certidões Negativas</h3>
+                    <button onclick="closeModal('modal-certidoes')" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-300">
+                    <p class="mb-4">As certidões negativas comprovam que você ou sua empresa não possui débitos pendentes junto aos órgãos fiscais. São documentos essenciais para participar de licitações, conseguir financiamentos, abrir contas bancárias e regularizar situações empresariais.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Principais tipos que emito:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>Certidão Negativa de Débitos Relativos aos Tributos Federais (Receita Federal)</li>
+                        <li>Certidão Negativa de Débitos Trabalhistas (TST)</li>
+                        <li>Certidão Negativa de Débitos Estaduais</li>
+                        <li>Certidão Negativa de Débitos Municipais</li>
+                        <li>Certidão Negativa do FGTS</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Por que contratar meu serviço:</h4>
+                    <p class="mb-4">Com 20 anos navegando pelos sistemas oficiais, sei exatamente onde buscar, como solicitar e quais documentos são necessários para cada situação. Evito que você perca tempo em sites confusos ou fique travado por exigências técnicas.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Como funciona:</h4>
+                    <p class="mb-4">Você me envia os dados básicos e eu cuido de toda a parte burocrática. Em poucos dias, você recebe suas certidões organizadas e prontas para uso, com orientações claras sobre validade e aplicação.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Quando você precisa:</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Participar de licitações</li>
+                        <li>Solicitar empréstimos bancários</li>
+                        <li>Regularizar CPF ou CNPJ</li>
+                        <li>Firmar contratos com órgãos públicos</li>
+                        <li>Comprovar regularidade fiscal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Documentos Imobiliários -->
+    <div id="modal-imoveis" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-bold text-primary dark:text-white">Saiba Mais - Documentos Imobiliários</h3>
+                    <button onclick="closeModal('modal-imoveis')" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-300">
+                    <p class="mb-4">Toda transação imobiliária exige documentação específica e atualizada. Cada documento tem sua função legal e prazos de validade. Navegar pelos cartórios e entender exatamente o que solicitar pode ser complexo para quem não conhece o sistema.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Principais documentos que obtenho:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>Matrícula atualizada do imóvel</li>
+                        <li>Certidão de Ônus e Gravames</li>
+                        <li>Certidão de Inteiro Teor</li>
+                        <li>Certidões de débitos municipais</li>
+                        <li>Certidão do Habite-se</li>
+                        <li>Documentos para financiamento habitacional</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Por que contratar meu serviço:</h4>
+                    <p class="mb-4">Sei exatamente qual cartório procurar, que informações são necessárias e como solicitar documentos de forma completa. Evito que você faça várias idas aos cartórios ou receba documentos incompletos.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Como funciona:</h4>
+                    <p class="mb-4">Com os dados básicos do imóvel, localizo o cartório responsável e solicito toda a documentação necessária. Organizo tudo de forma clara e oriento sobre a aplicação de cada documento.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Quando você precisa:</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Compra ou venda de imóvel</li>
+                        <li>Solicitação de financiamento</li>
+                        <li>Inventário ou partilha de bens</li>
+                        <li>Regularização de propriedade</li>
+                        <li>Due diligence imobiliária</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal CPF/CNPJ -->
+    <div id="modal-cpf-cnpj" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-bold text-primary dark:text-white">Saiba Mais - Regularização CPF/CNPJ</h3>
+                    <button onclick="closeModal('modal-cpf-cnpj')" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-300">
+                    <p class="mb-4">Seu CPF ou CNPJ está suspenso, cancelado ou com pendências? Isso pode travar sua vida financeira e empresarial. A regularização é um processo que exige conhecimento específico dos procedimentos da Receita Federal e pode envolver parcelamentos, quitações ou correções cadastrais.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Situações que resolvo:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>CPF suspenso por falta de declaração de IR</li>
+                        <li>CNPJ baixado ou suspenso por irregularidades</li>
+                        <li>Pendências fiscais que impedem movimentações</li>
+                        <li>Problemas de duplicidade ou inconsistências cadastrais</li>
+                        <li>Reativação de empresas inativas</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Meu diferencial:</h4>
+                    <p class="mb-4">Conheço todos os caminhos dentro dos sistemas da Receita Federal. Sei qual documentação apresentar, como estruturar pedidos e quais argumentos usar para acelerar processos que poderiam levar meses.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Como funciona:</h4>
+                    <p class="mb-4">Analiso sua situação específica, identifico as pendências exatas e monto a estratégia mais eficiente. Cuido de toda a documentação e acompanho cada etapa até a regularização completa.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Quando você precisa:</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Impossibilidade de emitir notas fiscais</li>
+                        <li>Conta bancária bloqueada</li>
+                        <li>Dificuldade para fazer financiamentos</li>
+                        <li>Problemas em processos licitatórios</li>
+                        <li>Questões trabalhistas pendentes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Consultoria -->
+    <div id="modal-consultoria" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-bold text-primary dark:text-white">Saiba mais - Consultoria Especializada</h3>
+                    <button onclick="closeModal('modal-consultoria')" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-300">
+                    <p class="mb-4">Cada situação burocrática é única e merece análise personalizada. Minha consultoria vai além de orientações básicas: ofereço estratégias específicas, cronogramas de ação e acompanhamento direto para resolver sua situação da forma mais eficiente possível.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Tipos de consultoria que ofereço:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>Análise de casos complexos</li>
+                        <li>Orientação para processos documentais</li>
+                        <li>Estratégias para regularização empresarial</li>
+                        <li>Planejamento de transações imobiliárias</li>
+                        <li>Resolução de impasses burocráticos</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Meu método:</h4>
+                    <p class="mb-4">Escuto sua situação completa, analiso todos os aspectos envolvidos e apresento um plano de ação claro com prazos realistas. Não ofereço soluções genéricas - cada estratégia é pensada especificamente para seu caso.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Como funciona:</h4>
+                    <p class="mb-4">Agendamos uma conversa detalhada onde você expõe toda a situação. Faço as análises necessárias e retorno com um diagnóstico completo e plano de ação. Se desejar, posso executar os procedimentos ou orientá-lo para fazer por conta própria.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Quando você precisa:</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Situação burocrática complexa sem solução aparente</li>
+                        <li>Múltiplos procedimentos interligados</li>
+                        <li>Prazos apertados para regularizações</li>
+                        <li>Dúvidas sobre estratégias legais</li>
+                        <li>Segunda opinião especializada</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Retirada & Entrega -->
+    <div id="modal-entrega" class="modal fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-start mb-6">
+                    <h3 class="text-2xl font-bold text-primary dark:text-white">Saiba Mais - Retirada & Entrega em Porto Alegre</h3>
+                    <button onclick="closeModal('modal-entrega')" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="prose max-w-none text-gray-700 dark:text-gray-300">
+                    <p class="mb-4">Ofereço serviço completo de retirada e entrega de documentos em Porto Alegre, proporcionando total comodidade para você que não tem tempo ou disponibilidade para se deslocar até cartórios, repartições públicas ou outros locais.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Como funciona:</h4>
+                    <p class="mb-4">Você me informa quais documentos precisa e onde estão localizados. Eu cuido de toda a logística, retiro os documentos nos locais indicados e entrego diretamente no endereço de sua preferência em Porto Alegre.</p>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Locais atendidos:</h4>
+                    <ul class="list-disc list-inside mb-4 space-y-1">
+                        <li>Cartórios em geral</li>
+                        <li>Receita Federal</li>
+                        <li>Junta Comercial</li>
+                        <li>Prefeitura e órgãos municipais</li>
+                        <li>Tribunais e fóruns</li>
+                        <li>Outros órgãos públicos</li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-semibold text-primary dark:text-white mb-3">Vantagens:</h4>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li>Economia de tempo e deslocamento</li>
+                        <li>Agilidade no processo</li>
+                        <li>Segurança no transporte dos documentos</li>
+                        <li>Atendimento personalizado</li>
+                        <li>Conhecimento dos locais e procedimentos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-border py-12">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-gray-600 dark:text-gray-400">&copy; 2024 Facilitadora Documental. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const activeModal = document.querySelector('.modal.active');
+                if (activeModal) {
+                    activeModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
